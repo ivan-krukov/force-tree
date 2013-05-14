@@ -10,11 +10,3 @@ title: Genes and Coinflips
   {% endfor %}
 </ul>
 
-Pages
----
-
-<ul class="pages">
-	{% for page in site.pages %}
-		<li><a href="{{ BASE_PATH }}{{page.url }}">{{ page.title }}</a></li>
-	{% endfor %}
-</ul>

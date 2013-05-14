@@ -15,4 +15,3 @@ _github_ [{{ site.author.github }}] [gh]
 
 _twitter_ [{{ site.author.twitter }}] [tw]
 
-_e-mail_ {{ site.author.email }}

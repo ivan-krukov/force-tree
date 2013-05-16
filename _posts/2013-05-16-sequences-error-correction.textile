@@ -1,0 +1,38 @@
+---
+layout: post
+title: "Sequences error correction"
+description: ""
+category: code
+tags: [code, python, sequencing]
+---
+{% include JB/setup %}
+[corr]:http://rosalind.info/problems/corr/
+[hamm]:http://en.wikipedia.org/wiki/Hamming_distance
+
+For this week's coding group, I have been working on the "Rosalind error correction in reads":corr problem. It is a rather simplified example of how to assign corrections to reads that come off the sequencer. 
+
+The general assumption is that the majority of the reads are correct, while some of them are erroneous. By erroneous, we mean exactly one substitution error, giving a "Hamming distance":hamm of 1 between two sequences. We also heave to consider both the original sequence and its reverse complement for matching. 
+
+First, let us define a function that returns the reverse complement of a string:
+
+{% highlight python %}
+def hamming(a,b):
+	return sum([i!=j for i,j in zip(a,b)])
+{% endhighlight %}
+
+Given two strings, we @zip@ them first, giving a list of tuples, with each element as a letter. Inside the list comprehension, we return @i!=j@, resulting in a list of booleans. Summing the list, we get the number of mismatches between the two string. 
+
+Let's also have a fancy one-liner for the reverse complement.
+
+{% highlight python %}
+def revcomp(a):
+	return a[::-1].translate(str.maketrans("ACTG","TGAC"))
+{% endhighlight %}
+
+Here we first reverse the string with the splice notation providing it a negative step argument, getting the whole string backwards. We then use @translate@ that accepts a translation object created with @str.maketrans@.
+
+The rest is quite simple. Go through your sequences, accumulating an index of unique reads, counting the number of occurences. The "correct" reads will have a count of 2 and more. The incorrect reads will be unique. Of course, this is a gross over-simplification.
+
+For each incorrect read, try to find its correct version (which will have exactly one substitution). The correct version will either be _as-is_ in the index of correct sequences, or its reverse complement will be satisfactory.
+
+The complete code can be found "here":https://gist.github.com/ivan-kryukov/67d5ec59e9668c785289 .

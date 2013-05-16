@@ -1,0 +1,58 @@
+---
+layout: post
+title: "Protease Classification"
+description: ""
+category: notes 
+tags: [proteases, databases, classification]
+---
+{% include JB/setup %}
+
+
+I wanted to understand proteases and their classification a little bit better. The "MEROPS":MEROPS database classifies most of the knowledge we currently have on the subject. The database is manually curated, and their papers offer a rather sparing description of computational methods. The most recent publication is "here":1. A bulk of database and classification description transcribed from "here":2.
+
+[MEROPS]http://www.merops.sanger.ac.uk/
+[1]http://nar.oxfordjournals.org/content/40/D1/D343.full-text-lowres.pdf
+[2]http://merops.sanger.ac.uk/about/classification.shtml
+
+MEROPS is a manually curated database that classifies proteases on three criteria:
+
+# The chemical mechanism of catalysis
+# Details of the catalyzed reaction
+# Molecular structure and homology
+
+The first classification criterion specifies the activity of the protease. The respective chemical moiety (or its modification) acts as a nucleophile at the center of the catalytic site. However, the classification is not definitive _i.e._ different structures and catalytic mechanisms exist within each group. There are the following types:
+
+table(table-striped).
+| Type|_. Letter|
+| Serine|=. S|
+| Cysteine|=. C|
+| Threonine|=. T|
+| Aspartic|=. A|
+| Glutamic|=. G|
+| Asparagine|=. N|
+| Metallo-|=. M|
+| Unknown|=. U|
+| Mixed|=. M|
+
+The above groups represent the topmost level of classification in MEROPS (and the first letter of the ID).
+
+The second classification is based on the reaction that the peptidase catalyses (which in a sense is always the hydrolysis of a peptide bond). The following groups exist:
+
+table(table-striped table-bordered).
+|_. Class|_. Description|_. Examples|_. EC group|
+| Endoprotease|Hydrolyses internal alpha-peptides bonds, tending to act away from the N or C terminus. This is the broadest category of proteases. | Chymotrypsin;<br> Pepsin;<br> Papain;|3.4.21 (serine)<br> 3.4.22 (cysteine)<br> 3.4.23 (aspartic)<br> 3.4.24 (metallo)<br> 3.4.25 (threonine)|
+| Omega-peptidase|Hydrolyses internal peptide bonds, but tends to work closer to termini. No free terminus required|Ubiqutinyl hydrolase-L3;<br>pyroglutamyl peptidases;<br>gamma-glutamyl hydrolases;|3.4.19|
+| Aminopeptidase| Requires a free N terminus, realeases a single amino acid|Aminopeptidases N and C;|3.4.11|
+| Carboxypeptidase| Requires a free C terminus, releases a single amino acid|Carboxypeptidase A1 and Y|3.4.16; 3.4.17; 3.4.18|
+| Dipeptidyl-peptidase| Hydrolyses a dipeptides off the N terminus| Dipeptidyl peptidases I and III|3.4.14 |
+| Tripeptidyl peptidase| Hydrolyses a tripeptide off the N terminus | Tripeptidyl peptidases I and II| 3.4.14|
+| Peptidyl-dipeptidases| Hydrolyse a dipeptide off the C terminus | Peptidyl-dipeptidase A|3.4.15|
+| Dipeptidase| Hydrolyses a dipeptide off the C terminus or the N terminus| Dipeptidase A; Membrane dipeptidase|3.4.13|
+
+Each protease group is called a _species_ in MEROPS. They are grouped into families, and families are grouped in clans. The ID for each protein is of the form S01.001, where _S_ is the mechanistic classification with the associated subgroup. The three digits that follow identify the particular protein. There is an implication of similar function between members of the same species. It is also expected that the species variants of the members of a MEROPS species will be consistent with biological species tree.
+
+Families are constructed on the basis of sequence comparison. The most important aspect is to have statistically high similarity to at least one *peptidase unit* for some member of the given family. The peptidase unit is defined as the section that is most directly responsible for catalytic activity. It is arguably the most important definition that MEROPS makes. Thus, any downstream analyses should rely heavily on this definition. Some families may be further split into subfamilies. Notice that family assignment implies the broadest possible homology assignment _i.e._ clans are not homologous. Tools used for homology assignment (into families) include BLASTP, HMMER and FastA. The authors mention that only statistically significant hits (expectation value < 0.001) are accepted into homolog groups.
+
+  [DALI]http://www.ncbi.nlm.nih.gov/pubmed/8578593
+
+Clans represent possible large homology groups that cannot be conclusively established on the sequence level, but there exists a strong reason to believe that those sequences share common ancestry. These are commonly assigned on the basis of three-dimensional structure similarity. "DALI":DALI is used for structure assessment.

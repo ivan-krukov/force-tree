@@ -1,0 +1,30 @@
+---
+layout: post
+title: "Bayes basics"
+description: ""
+category: notes
+tags: [statistics, phylogenetics]
+---
+{% include JB/setup %}
+
+[1]http://www.sinauer.com/phylogenetic-trees-made-easy-a-how-to-manual.html
+
+These are my notes on Bayesian inference from "Barry G. Hall's":1 book.
+
+h3. General
+
+Baeyesian methods attempt to build the best tree based on both the _data_ and the given _model_ @max(P(tree|data,model))@, while ML only maximizes based on the data @max(P(data|tree))@. The algorithm is essentially an optimizer of the tree space - it attempts to find the maiximum height point. The height of a particular tree in the tree space corresponds to the likelihood of that tree. The closeness of the points in space corresponds to their similarity.
+
+Unlike ML, where we are looking for a single best tree, BI searches for a set of trees. 
+
+A BI program will proceed in the following steps until _convergence_:
+
+# Chose some tree as a starting point
+# Determine the tree's likelihood
+# Change the tree slightly by topology or branch length
+# Calculate the likelihood of the new tree
+# Accept the new tree if its likelihood is greater than that of the previous tree.
+
+One can clearly see the analogy with optimization algorithms such as gradient descent.
+
+Bayesian analysis depnds strongly on the model that has been selected, which is why it is essential to chose the appropriate model (I feel like I am being a bit too obvious here).

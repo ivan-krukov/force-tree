@@ -1,0 +1,35 @@
+<html>
+  <head>
+    <title>Phylogeny viewer</title>
+    <script type="text/javascript" src="build/Arborist.min.js"></script>
+    <link rel="stylesheet" href="lib/jquery-ui/jquery-ui.min.css">
+    <link rel="stylesheet" type="text/css" href="build/Arborist.css">
+  </head>
+  <body onload="main()">
+      <div id="controls">
+        <input type="file" onchange="update(this)"/>
+        <br>
+        <input type="checkbox" onchange="toggle('#labelToggle', '.leafLabel')" id="labelToggle"/> Show leaf labels
+        </br>
+        <input type="checkbox" onchange="toggle('#supportToggle', '.support')" id="supportToggle"/> Show support values
+        </br>
+        <input type="checkbox" onchange="toggle('#gridToggle', '.treeGrid')" id="gridToggle"/> Draw grid
+        </br>
+        <input type="range" min=5 max=20 step=1 value=8 oninput="setAttr('#labelSize', '.leafLabel', 'font-size')" id="labelSize"/> Label size
+        <br>
+        <input type="range" min=1 max=10 step=1 value=3 oninput="setAttr('#branchThickness', '.branch', 'stroke-width')" id="branchThickness"/> Branch thicnkess
+        <br>
+        <button onclick="resetZoom()">Reset zoom</button>
+        <br>
+        <button onclick="download_tree()">Download tree</button><treeOutput></treeOutput>
+        <br/>
+      </div>
+      <div id="content">
+        <div id="info"></div>
+        <div id="data-tree"></div>
+        <div id="bottom">
+          de Koning Lab, 2014
+        </div>
+      </div>
+  </body>
+</html>

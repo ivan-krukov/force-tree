@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dynamic trees</title>
+  <script src="https://d3js.org/d3.v4.js"></script>
+  <script src="newick.js"></script>
+  <script src="force_tree.js"></script>
+</head>
+<body onload="parse()">
+  
+  <div> 
+    Newick tree:
+    <input type="text" name="tree" size="100" id="tree_input" value="((A:0.1,B:0.2)C:0.2,D:0.3);">
+  </div>
+  <div>
+    Tree scale:
+    <input type="range" value="200" min="100" max="800" id="tree_scale_input">
+  </div>
+  <div>
+    <button onclick="parse()">Draw</button>
+  </div>
+<canvas width="800" height="800" style="border: 1px dashed"></canvas>
+</body>

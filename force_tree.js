@@ -79,8 +79,11 @@ var draw = function(graph) {
   }
 
   function draw_node(d) {
-    context.moveTo(d.x + node_radius, d.y);
-    context.arc(d.x, d.y, node_radius, 0, 2 * Math.PI);
+    var radius = d.leaf ? node_radius : node_radius/2;
+
+    context.moveTo(d.x + radius, d.y);
+    context.arc(d.x, d.y, radius, 0, 2 * Math.PI);
+    
   }
 
   function label_node(d) {

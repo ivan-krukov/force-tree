@@ -63,10 +63,11 @@ var newick = {
 
     for (var i = 0; i < traversal.length; i++) {
       var node = traversal[i];
-      var name = node.name !== undefined ? node.name : "";
+      var is_leaf = node.children === undefined;
+      var name = is_leaf ? node.name : "";
       nodes.push({
         label: name,
-        // index: node.index
+        leaf: is_leaf
       });
       links.push({
         source: node.parent.index,
